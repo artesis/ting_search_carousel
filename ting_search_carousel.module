@@ -109,106 +109,24 @@ function ting_search_carousel_do_request($full = FALSE) {
 
   // There are any queries set.
   if (count($search_queries) > 0) {
-    module_load_include('client.inc', 'ting');
-    module_load_include('pages.inc', 'ting_covers');
+    module_load_include('with_images.inc', 'ting');
 
-    $service = new AdditionalInformationService(
-      variable_get('addi_wsdl_url'),
-      variable_get('addi_username'),
-      variable_get('addi_group'),
-      variable_get('addi_password')
-    );
     $j = 0;
 
     // Search for each query up to 100 items.
     foreach ($search_queries as $item) {
-      $result = '';
-
-      // Whether we need to fetch all items, perform indepth search.
-      // Seek first 100 collections otherwise.
-      if ($full) {
-        $page = 1;
-        $collections = array();
-        // Make recursive ting calls
-        while ($result = ting_do_search($item['query'], $page++, 50, array(
-          'facets' => array(),
-          'enrich' => TRUE,
-          'allObjects' => FALSE,
-          'sort' => $sort))) {
-          if ($result->numTotalCollections == 0) {
-            break;
-          }
-
-          $collections[] = $result;
-        }
-
-        // Rearrange fetched results, as if they were retrieved via single call
-        $result = new stdClass();
-        $result->collections = array();
-        foreach ($collections as $collection) {
-          foreach ($collection->collections as $item) {
-            $result->collections[] = $item;
-          }
-        }
-      }
-      else {
-        $result = ting_do_search(
-          $item['query'], 1, 100, array(
-            'facets' => array(),
-            'enrich' => TRUE,
-            'allObjects' => FALSE,
-            'sort' => $sort
-          )
-        );
-      }
+      $results = ting_get_objects_with_images($item['query'], 100, $sort, array('ting_search_carousel'));
 
       // For each found collection, find a related item with cover.
-      foreach ($result->collections as $collection) {
-        foreach ($collection->reply->objects as $object) {
-          $path = 'public://ting_search_carousel/' . md5($object->localId) . '.jpg';
-
-          $ting_item_cover = '';
-          $file = '';
-
-          // If image is not present, try fetch it
-          if (!file_exists($path)) {
-            $ting_item_cover = $service->getByFaustNumber($object->localId);
-
-            // No cover found, go to next item in collection
-            if (count($ting_item_cover) == 0) {
-              break;
-            }
-
-            $k = array_keys($ting_item_cover);
-            $source_url = '';
-
-            if ($ting_item_cover[$k[0]]->thumbnailUrl) {
-              $source_url = $ting_item_cover[$k[0]]->thumbnailUrl;
-            }
-            elseif ($ting_item_cover[$k[0]]->detailUrl) {
-              $source_url = $ting_item_cover[$k[0]]->detailUrl;
-            }
-
-            // Saves and returns new image file object
-            $file = _ting_covers_pages_fetch_image('public://ting_search_carousel/' . md5($object->localId) . '.jpg', $source_url);
-          }
-
+      foreach ($results as $object) {
           $item = new stdClass();
-          $item->id = $object->id;
-          $item->creator = isset($object->record['dc:creator']['dkdcplus:aut'][0])
-            ? $object->record['dc:creator']['dkdcplus:aut'][0]
-            : '';
-          $item->title = isset($object->record['dc:title'][''][0])
-            ? $object->record['dc:title'][''][0]
-            : '';
-          $item->image = image_style_url(
-            'ting_search_carousel',
-            isset($file->uri) ? $file->uri : $path
-          );
-
+          $item->id = $object->getLocalId();
+          $creator = $object->getCreators();
+          $item->creator = !empty($creator) ? $creator[0] : '';
+          $item->title = $object->getTitle();
+          $item->image = $object->getImage('ting_search_carousel');
           $search_items[$j][] = $item;
           break;
-        }
       }
 
       $j++;

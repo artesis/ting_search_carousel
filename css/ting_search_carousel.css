@@ -32,6 +32,7 @@
 .ting-search-carousel .ting-search-results {
   position: relative;
   height: 200px;
+  clear: both;
 }
 
 .ting-search-carousel .ting-search-results .subtitle {

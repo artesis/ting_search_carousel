@@ -10,7 +10,7 @@ drupal_add_js($path . '/js/jquery.rs.carousel.js');
 drupal_add_js($path . '/js/ting_search_carousel.js');
 drupal_add_css($path . '/css/ting_search_carousel.css');
 ?>
-<div class="ting-search-carousel">
+<div class="ting-search-carousel" style="display: none;">
   <ul class="search-controller">
     <?php foreach ($searches as $i => $search) : ?>
       <li class="<?php echo ($i == 0) ? 'active' : ''; ?>">

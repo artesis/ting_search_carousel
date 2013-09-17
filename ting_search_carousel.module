@@ -126,7 +126,6 @@ function ting_search_carousel_do_request($full = FALSE) {
           $item->title = $object->getTitle();
           $item->image = $object->getImage('ting_search_carousel');
           $search_items[$j][] = $item;
-          break;
       }
 
       $j++;

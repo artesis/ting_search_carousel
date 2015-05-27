@@ -1,4 +1,7 @@
 .ting-search-carousel {
+  background: #fff;
+  margin: 0 0 20px;
+  padding: 0;
   width: 100%;
 }
 
@@ -6,44 +9,56 @@
   height: 20px;
   list-style: none outside none;
   margin: 0;
-  padding: 0;
+  padding: 10px 0 0 10px;
   width: 100%;
 }
 
 .ting-search-carousel .search-controller li.active {
-  background: none repeat scroll 0 0 #918F91;
+  background: none;
 }
 
 .ting-search-carousel .search-controller li {
-  background: none repeat scroll 0 0 #D1D9D7;
+  background: none;
   float: left;
   font-size: 11px;
   height: 18px;
   line-height: 15px;
   margin: -1px 2px 0 0;
-  padding: 0 17px;
+  padding: 0 5px 0 0;
 }
 
 .ting-search-carousel .search-controller li a {
   font-size: 11px;
   line-height: 15px;
+  background: #535250;
+  color: #fff;
+  letter-spacing: .2px;
+  padding: 2px 6px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.ting-search-carousel .search-controller li.active a {
+  background: #38a39d;
 }
 
 .ting-search-carousel .ting-search-results {
   position: relative;
-  height: 200px;
   clear: both;
+  height: auto;
+  overflow: hidden;
 }
 
 .ting-search-carousel .ting-search-results .subtitle {
-  font-size: 42px;
-  font-weight: normal;
-  line-height: 0.9;
-  margin: 10px 0 0 40px;
+  color: #bfbfbf;
+  float: none;
+  font-size: 36px;
+  line-height: 46px;
+  margin: 16px 0 0 10px;
   overflow: hidden;
-  padding: 10px 0 10px 10px;
+  padding: 0;
   text-transform: uppercase;
-  width: 250px;
+  width: auto;
 }
 
 .ting-search-carousel .ting-search-results .info {
@@ -55,8 +70,6 @@
 
 .ting-search-carousel .ting-search-results .info span {
   display: block;
-  font-size: 10px;
-  line-height: 1.25;
   text-align: center;
 }
 
@@ -66,14 +79,19 @@
 
 /* carousel */
 .ting-search-carousel .rs-carousel {
+  float: none;
+  margin: 25px 10px 10px;
   opacity: 1 !important;
   overflow: hidden;
-  width: 580px;
+  padding: 0 20px;
+  position: relative;
+  width: auto;
 }
 
 .ting-search-carousel .rs-carousel .rs-carousel-mask {
   position:relative;
   height: 200px;
+  overflow: hidden;
 }
 
 .ting-search-carousel .rs-carousel .rs-carousel-runner {
@@ -93,6 +111,7 @@
 .ting-search-carousel .rs-carousel .rs-carousel-item img {
   max-width: 112px;
   height: 140px;
+  width: auto;
 }
 .ting-search-carousel .no-js .rs-carousel .rs-carousel-runner {
   position: static;
@@ -102,14 +121,33 @@
   float: left;
   height: 180px;
   overflow: hidden;
-  padding-top: 20px;
+  padding: 0 10px 10px;
   text-align: center;
   padding-right: 16px;
   width: 100px;
 }
 
+.ting-search-carousel .rs-carousel a {
+  text-decoration: none;
+}
+
 .ting-search-carousel .rs-carousel.rs-carousel-vertical .rs-carousel-item {
   float: none;
+}
+
+.ting-search-carousel .ting-search-results .info {
+  height: inherit;
+}
+
+.ting-search-carousel .ting-search-results .info,
+.ting-search-carousel .ting-search-results .info span {
+  color: #2d9e9a;
+  font-size: 12px;
+  line-height: 14px;
+  margin: 3px 0 0 0;
+  text-decoration: none !important;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
 }
 
 /* pagination */
@@ -148,29 +186,30 @@
 .ting-search-carousel .rs-carousel-action-next,
 .ting-search-carousel .rs-carousel-action-prev {
   background-image: url('../images/buttons.png');
+  background-repeat: no-repeat;
   position: absolute;
-  top: 86px;
-  height: 35px;
+  top: 30%;
+  height: 19px;
   outline: none;
   text-indent: -9999px;
-  width: 35px;
+  width: 19px;
 }
 
 .ting-search-carousel .rs-carousel-action-prev {
-  left: -15px;
+  left: 0;
 }
 
-.ting-search-carousel .rs-carousel-action-next {
-  right: -15px;
-  background-position: 0 -35px;
+.ting-search-carousel a.rs-carousel-action-next {
+  background-position: -30px 0;
+  right: 0;
 }
 
-.ting-search-carousel .rs-carousel-action-prev:hover {
-  background-position: 70px 0;
+.ting-search-carousel a.rs-carousel-action-prev:hover {
+  background-position: -60px 0;
 }
 
-.ting-search-carousel .rs-carousel-action-next:hover {
-  background-position: 70px -35px;
+.ting-search-carousel a.rs-carousel-action-next:hover {
+  background-position: -90px 0;
 }
 
 .ting-search-carousel .rs-carousel-action-disabled {

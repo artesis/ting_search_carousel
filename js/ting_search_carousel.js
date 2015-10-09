@@ -36,15 +36,9 @@
       dataType : 'json',
       success : function(msg) {
         $('.ting-search-carousel .subtitle').html(msg.subtitle);
-        if (!carousel) {
-          $('.ting-search-carousel .ting-rs-carousel .rs-carousel-runner').html(msg.content);
-          carousel = $('.ting-search-carousel .ting-rs-carousel').carousel();
-        }
-        else {
-          carousel.carousel('destroy');
-          $('.ting-search-carousel .ting-rs-carousel .rs-carousel-runner').html(msg.content);
-          carousel.carousel();
-        }
+        $('.ting-search-carousel .ting-rs-carousel .rs-carousel-runner').html(msg.content);
+        carousel = $('.ting-search-carousel .ting-rs-carousel').carousel();
+        carousel.carousel('refresh');
       }
     });
   }

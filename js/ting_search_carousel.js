@@ -4,7 +4,7 @@
   Drupal.behaviors.tingSearchCarousel = {
     attach: function(context) {
       // Don't proceed if you're on mobile version, since carousel script hangs when container is not visible.
-      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || $(document).width() < 740 ) {
+      if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || $(document).width() < 740 ) {
         $('.ting-search-carousel').hide();
       } else {
         $('.ting-search-carousel').show();

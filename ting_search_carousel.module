@@ -119,13 +119,14 @@ function ting_search_carousel_do_request($full = FALSE) {
 
       // For each found collection, find a related item with cover.
       foreach ($results as $object) {
-          $item = new stdClass();
-          $item->id = $object->getLocalId();
-          $creator = $object->getCreators();
-          $item->creator = !empty($creator) ? $creator[0] : '';
-          $item->title = $object->getTitle();
-          $item->image = $object->getImage('ting_search_carousel');
-          $search_items[$j][] = $item;
+        $item = new stdClass();
+        $item->id = $object->getLocalId();
+        $creator = $object->getCreators();
+        $item->creator = !empty($creator) ? $creator[0] : '';
+        $item->title = $object->getTitle();
+        $item->image = $object->getImage('ting_search_carousel');
+        $item->alt = !empty($creator) ? $creator[0] . ': ' . $item->title : $item->title;
+        $search_items[$j][] = $item;
       }
 
       $j++;
@@ -167,4 +168,3 @@ function ting_search_carousel_image_default_styles() {
 
   return $styles;
 }
-

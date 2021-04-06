@@ -1,9 +1,12 @@
 <?php
 /**
  * @file
- *
+ * Search carousel wrapper markup.
  */
+
+global $base_url;
 $path = drupal_get_path('module', 'ting_search_carousel');
+$ajax_loader = url($base_url . '/' . $path . '/images/ajax-loader.gif');
 
 drupal_add_library('system', 'ui.widget');
 drupal_add_js($path . '/js/jquery.rs.carousel-min.js');
@@ -26,7 +29,7 @@ drupal_add_css($path . '/css/ting_search_carousel.css');
       <div class="rs-carousel-mask">
         <ul class="rs-carousel-runner">
           <li>
-            <img src="<?php echo $path; ?>/images/ajax-loader.gif" />
+            <img src="<?php print $ajax_loader; ?>" />
           </li>
         </ul>
       </div>
